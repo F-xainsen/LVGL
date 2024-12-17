@@ -1,0 +1,23 @@
+[project_search_path]: ./
+[map_search_path]: ./
+[project_file_path]: .//USB_VIRTUAL_COM.uvprojx
+[ map_file_path]: .//USB_VIRTURAL_COM.map
+[parse_keil_map start]: 
+[Found keyword]: ----------Execution Region----------
+[name]:  ER_IROM1 
+[Exec base]: 0x8000000
+[Size]: 0x7c80
+[Max]: 0x10000
+[Found keyword]: ----------Execution Region----------
+[name]:  RW_IRAM1 
+[Exec base]: 0x20000000
+[Size]: 0x22c8
+[Max]: 0x5000
+[parse_keil_map over printf bar]: 
+  RW_IRAM1 :0x20000000
+   20.00 KB :|¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö____________|   43.48 % (    8.70 KB /    20.00 KB) [11576 B]
+  ER_IROM1 :0x8000000
+   64.00 KB :|¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö___________|   48.63 % (   31.13 KB /    64.00 KB) [33664 B]
+[export csv]: ./USB_VIRTURAL_COM_sort_by_flash.csv
+[export csv]: ./USB_VIRTURAL_COM_sort_by_ram.csv
+[export xlsx]: USB_VIRTURAL_COM_analysis.xlsx

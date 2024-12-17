@@ -1,0 +1,19 @@
+{
+    "highlight.regexes": {
+        "(TODO|FIXME|HACK)": {
+            "filterCaseSensitive": false,      // 忽略大小写
+            "backgroundColor": "#ff0000",      // 设置背景颜色为红色
+            "color": "#ffffff"                 // 设置文本颜色为白色
+        },
+        "(debug|console.log)": {
+            "filterCaseSensitive": true,       // 区分大小写
+            "backgroundColor": "#00ff00",      // 设置背景颜色为绿色
+            "color": "#000000",                // 设置文本颜色为黑色
+            "isWholeWord": true                // 仅高亮完整的单词
+        }
+    },
+
+    "highlight.matchCase": true,              // 启用区分大小写
+    "highlight.isWholeWord": false,           // 是否仅高亮完整的单词
+    "highlight.showHighlightInRuler": true    // 在行标尺上显示高亮
+}
