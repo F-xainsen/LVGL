@@ -1,155 +1,112 @@
-import matplotlib.pyplot as plt
-from PIL import Image, ImageDraw, ImageFont
-import random
-import time
-import math
-import numpy as np
-# from watermark import Watermark
+import sys
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QImage, QPainter, QColor, QFont, QPixmap
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel
 
-class ProgressBar:
-    def __init__(self, image_path, font_path='arial.ttf', font_size=10):
-        # 加载背景图片
-        self.img = Image.open(image_path).convert("RGB")
-        self.width, self.height = self.img.size
-        self.font = ImageFont.truetype(font_path, font_size)  # 设置字体
-        self.position = (10, 10)  # 文字的起始位置
-        self.bar_height = 10  # 进度条的高度
-        self.max_width = 80  # 进度条最大宽度
-        # self.queue = queue  # 用于接收数据的队列
+class ProgressBar(QWidget):
+    def __init__(self, image_path, font_size=10):
+        super().__init__()
+        self.setWindowTitle("Dynamic Progress Bar")
+        self.setGeometry(100, 100, 400, 400)
 
-        # 扇形进度条的配置
-        self.radius = min(self.width, self.height) // 8  # 扇形进度条半径
-        self.center = (self.width // 6, self.height // 3)  # 扇形中心点
-        
-        # # 初始化 Watermark 类
-        # self.watermark = Watermark(image_path, font_path, font_size)
-        # 水印位置
-        # self.watermark_position = (240, 10)
-        # self.original_img = self.img.copy()  # 保持一份原始图片
+        self.image_path = image_path
+        self.font = QFont('Arial', font_size)
+        self.max_width = 200
+        self.bar_height = 10
 
-    def draw_bar(self, draw, progress):
-        # 绘制条形进度条
-        bar_width = int(self.max_width * progress)  # 进度条的宽度
-        draw.rectangle([10, 24, 10 + bar_width, 30], fill="blue")  # 进度条本体
+        self.cpu_percent = 0.0
+        self.cpu_freq = 0.0
+        self.cpu_temperature = 0.0
+        self.memory = 0.0
+        self.net_up_speed = 0.0
+        self.net_down_speed = 0.0
 
-        # 绘制进度百分比文本
-        text = f"CPU Usage: {int(progress * 100)}%"
-        draw.text(self.position, text, font=self.font, fill="black")
+        self.image = QImage(self.image_path)
+        self.pixmap = QPixmap(self.image)
 
-    def draw_circle(self, draw, progress):
-        # 计算进度条的角度
-        angle = 360 * progress  # 进度条弧度
+        self.label = QLabel(self)
+        self.label.setPixmap(self.pixmap)
+        self.label.setGeometry(0, 0, self.pixmap.width(), self.pixmap.height())
 
-        # 绘制扇形进度条
-        draw.arc(
-            [self.center[0] - self.radius, self.center[1] - self.radius,
-             self.center[0] + self.radius, self.center[1] + self.radius],
-            start=90, end=90 + angle, fill="red", width=10)  # 绘制进度弧线
+        # Start a timer to update the progress
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_progress)
+        self.timer.start(1000)  # Update every second
 
-        # 绘制温度文本
-        text = f"{int(progress * 100)}°C"
-        text_bbox = draw.textbbox((0, 0), text, font=self.font)
-        text_width = text_bbox[2] - text_bbox[0]
-        text_height = text_bbox[3] - text_bbox[1]
-        text_position = (self.center[0] - text_width // 2, self.center[1] - text_height // 2)
-        draw.text(text_position, text, font=self.font, fill="black")
+    def draw_bar(self, painter, y_position, progress, label):
+        bar_width = float(self.max_width * progress)
+        painter.setBrush(QColor(0, 0, 255))  # Blue color for bar
+        painter.drawRect(10, y_position, bar_width, self.bar_height)
 
-    def update_image(self, cpu_progress, temp_progress):
-        # 复制原始图片以避免修改原图
-        img_copy = self.img.copy()
-        draw = ImageDraw.Draw(img_copy)
-        
-        # 获取当前时间并作为水印
-        # img_copy = self.watermark.update_image(img_copy)
+        painter.setPen(QColor(0, 0, 0))  # Black color for text
+        painter.setFont(self.font)
+        text = f"{label}: {float(progress * 100)}%"
+        painter.drawText(10, y_position - 10, text)
 
-        # 绘制条形进度条
-        self.draw_bar(draw, cpu_progress)
+    def draw_circle(self, painter, progress, y_position, label):
+        radius = min(self.pixmap.width(), self.pixmap.height()) // 8
+        center = (self.pixmap.width() // 2, y_position)
+        angle = 360 * progress
 
-        # 绘制扇形进度条
-        self.draw_circle(draw, temp_progress)
-        
-        # self.ax.imshow(img_copy)
-        # plt.draw()
-        # img_copy = np.array(img_copy)
-        
+        painter.setPen(QColor(255, 0, 0))  # Red color for arc
+        painter.drawArc(center[0] - radius, center[1] - radius,
+                        radius * 2, radius * 2, 90 * 16, int(angle * 16))
+
+        painter.setPen(QColor(0, 0, 0))  # Black color for text
+        text = f"{float(progress * 100)}%"
+        text_rect = painter.boundingRect(0, 0, 0, 0, Qt.AlignCenter, text)
+        text_width = text_rect.width()
+        text_height = text_rect.height()
+
+        # Center the text
+        painter.drawText(center[0] - text_width // 2, center[1] - text_height // 2, text)
+
+    def update_image(self):
+        # Create a new QImage to paint on it
+        img_copy = QImage(self.pixmap.size(), QImage.Format_RGB888)
+        img_copy.fill(QColor(255, 255, 255))  # Fill with white background
+
+        painter = QPainter(img_copy)
+        painter.setRenderHint(QPainter.Antialiasing)
+
+        # Draw all the elements (bars and circles)
+        self.draw_bar(painter, 24, self.memory, "Memory Usage")
+        self.draw_bar(painter, 54, self.net_up_speed / 1024, "Net Up Speed")
+        self.draw_bar(painter, 84, self.net_down_speed / 1024, "Net Down Speed")
+
+        self.draw_circle(painter, self.cpu_percent / 100.0, 130, "CPU Percent")
+        self.draw_circle(painter, self.cpu_freq / 1000.0, 230, "CPU Frequency")
+        self.draw_circle(painter, self.cpu_temperature / 100.0, 330, "CPU Temperature")
+
+        painter.end()
         return img_copy
 
+    def update_progress(self):
+        # Simulate the update of system stats here
+        self.cpu_percent = (self.cpu_percent + 1) % 100
+        self.cpu_freq = (self.cpu_freq + 10) % 4000
+        self.cpu_temperature = (self.cpu_temperature + 1) % 100
+        self.memory = (self.memory + 0.02) % 1  # 0 to 1
+        self.net_up_speed = (self.net_up_speed + 50) % 1000  # KB/s
+        self.net_down_speed = (self.net_down_speed + 50) % 1000  # KB/s
+
+        img_copy = self.update_image()
+
+        # Update the pixmap
+        self.pixmap = QPixmap.fromImage(img_copy)
+        self.label.setPixmap(self.pixmap)
+
     def show_image(self, img_copy):
-        # 使用matplotlib显示更新后的图像
-        plt.imshow(img_copy)
-        plt.axis('off')  # 不显示坐标轴
-        plt.draw()  # 刷新图像
-        plt.pause(1)  # 每0.1秒刷新一次图像
-        
-    
-    
+        self.pixmap = QPixmap.fromImage(img_copy)
+        self.label.setPixmap(self.pixmap)
+
     def run(self):
-        plt.ion()  # 开启交互模式
-        plt.figure(figsize=(6, 6))  # 设置图像显示大小
+        self.show()
 
-        while True:
-            # 随机生成进度条的进度（范围0到1），模拟CPU占用率和温度
-            cpu_progress = random.random()  # 随机生成一个0到1之间的浮动值，模拟CPU占用率
-            temp_progress = random.random()  # 随机生成一个0到1之间的浮动值，模拟CPU温度
-
-            # 更新图像
-            img_copy = self.update_image(cpu_progress, temp_progress)
-            self.show_image(img_copy)
-
-            # 等待一段时间后再次更新进度条
-            # time.sleep(1)  # 每秒更新一次
-
-        plt.ioff()  # 关闭交互模式
-        plt.show()  # 显示最终图像
-        
-        
-    # def run(self):
-    #     while True:
-    #         if not self.queue.empty():
-    #             cpu_progress = self.queue.get()  # 从队列中获取 CPU 进度值
-    #             img_copy = self.update_bar(cpu_progress)
-    #             self.animate(cpu_progress, img_copy)
-    #         time.sleep(1)
-   
-
-
-# 示例用法：
-image_path = 'D:/project/STM32F103/pyQt/UI_TEXT1.0/UI/res/3.5/swsw.png'  # 这里替换成你的图片路径
-progress_bar = ProgressBar(image_path)
-progress_bar.run()
-
-# def progress_bar_thread(queue):
-#     """ 用于更新进度条的线程 """
-#     while True:
-#         # 模拟 CPU 占用率的进度条（随机）
-#         cpu_progress = random.random()
-#         queue.put(cpu_progress)  # 将进度条的值传递给队列
-#         # time.sleep(1)
-
-# def main():
-#     # 创建一个队列，用于线程之间通信
-#     queue = Queue()
-
-#     # 创建进度条对象
-#     progress_bar = ProgressBar(image_path="D:/project/STM32F103/pyQt/UI_TEXT1.0/UI/res/3.5/swsw.png", queue=queue)
-
-#     # 启动动态时间更新的线程
-#     time_thread_instance = threading.Thread(target=time_thread, args=(queue,))
-#     time_thread_instance.daemon = True  # 设置为守护线程
-#     time_thread_instance.start()
-
-#     # 启动进度条更新的线程
-#     progress_thread_instance = threading.Thread(target=progress_bar_thread, args=(queue,))
-#     progress_thread_instance.daemon = True  # 设置为守护线程
-#     progress_thread_instance.start()
-
-#     # 使用 FuncAnimation 动态更新图像
-#     plt.ion()
-#     plt.show()
-
-#     # 运行主循环
-#     progress_bar.run()
-
-
-# if __name__ == "__main__":
-#     main()
+# Example usage:
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    image_path = "D:/project/STM32F103/pyQt/UI_TEXT1.0/UI/res/3.5/swsw.png"  # Replace with your image path
+    progress_bar = ProgressBar(image_path)
+    progress_bar.run()
+    sys.exit(app.exec_())

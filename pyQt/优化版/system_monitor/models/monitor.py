@@ -1,13 +1,16 @@
 import psutil
 import win32com.client
 
-from pycaw.pycaw import AudioUtilities
-from pycaw.pycaw import IAudioEndpointVolume
+# from pycaw.pycaw import AudioUtilities
+# from pycaw.pycaw import IAudioEndpointVolume
 
+import queue
+import time 
 
 class SystemMonitor:
 
     def __init__(self):
+        # self.data_queue = data_queue or queue.Queue
         self.cpu_percent = 0
         self.cpu_freq = 0
         self.cpu_temperature = 0
@@ -30,6 +33,14 @@ class SystemMonitor:
             self.net_down_speed = self.net.bytes_recv - self.net_before.bytes_recv
 
         #self.volume = SystemMonitor.get_volume_precent()
+        # 将更新后的数据传递给队列
+        # self.data_queue.put((self.cpu_percent, 
+        #                      self.cpu_freq, 
+        #                      self.cpu_temperature, 
+        #                      self.memory.percent, 
+        #                      self.net_up_speed, 
+        #                      self.net_down_speed))
+
 
     def __str__(self):
         return (f"System Monitor:\n"
@@ -79,17 +90,17 @@ class SystemMonitor:
     def get_net_info():
         return psutil.net_io_counters()
 
-    @staticmethod
-    def get_volume_precent():
-        # 获取默认音频设备
-        devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(
-            IAudioEndpointVolume._iid_, 1, None)
+    # @staticmethod
+    # def get_volume_precent():
+    #     # 获取默认音频设备
+    #     devices = AudioUtilities.GetSpeakers()
+    #     interface = devices.Activate(
+    #         IAudioEndpointVolume._iid_, 1, None)
 
-        # 获取音量
-        volume = interface.QueryInterface(IAudioEndpointVolume)
-        volume = volume.GetMasterVolumeLevelScalar()  # 返回范围 0.0 到 1.0
-        return volume * 100  # 转换为百分比
+    #     # 获取音量
+    #     volume = interface.QueryInterface(IAudioEndpointVolume)
+    #     volume = volume.GetMasterVolumeLevelScalar()  # 返回范围 0.0 到 1.0
+    #     return volume * 100  # 转换为百分比
 
     @staticmethod
     def get_gpu_info_wmi():
@@ -112,3 +123,10 @@ class SystemMonitor:
 
         except:
             pass
+
+    # def run(self):
+    #     """定时更新系统信息"""
+    #     # print(time)
+    #     while True:
+    #         self.update_all()
+    #         # time.sleep(1)  # 每秒更新一次

@@ -1,0 +1,15 @@
+"D:\app_install\IAR\arm\bin\armproc.dll" 
+
+"D:\app_install\IAR\arm\bin\armstlink2.dll" 
+
+"D:\project\STM32F103_LCD\EWARM\STM32F103_LCD\Exe\STM32F103_LCD.out" 
+
+--plugin="D:\app_install\IAR\arm\bin\armbat.dll" 
+
+--device_macro="D:\app_install\IAR\arm\config\debugger\ST\STM32F1xx.dmac" 
+
+--flash_loader="D:\app_install\IAR\arm\config\flashloader\ST\FlashSTM32F10xx8.board" 
+
+
+
+

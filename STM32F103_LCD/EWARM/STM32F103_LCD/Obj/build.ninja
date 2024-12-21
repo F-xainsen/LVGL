@@ -1,0 +1,59 @@
+#Generating source browse information for project STM32F103_LCD
+
+
+#Abbreviations
+cc = D$:\app_install\IAR\common\bin\SourceIndexer.exe
+ll = D$:\app_install\IAR\common\bin\PbdLink.exe
+bd = D$:\app_install\IAR\common\bin\makeBrowseData.exe
+
+
+
+#Rules
+rule index
+  depfile = $out.dep
+  command = $cc -out=$out -f $in
+rule link
+  command = $ll -M $out $in
+rule browsedata
+  command = $bd $in -output  $out
+
+
+
+#Build steps
+build dma.pbi : index dma.xcl
+build gpio.pbi : index gpio.xcl
+build main.pbi : index main.xcl
+build spi.pbi : index spi.xcl
+build stm32f1xx_hal_msp.pbi : index stm32f1xx_hal_msp.xcl
+build stm32f1xx_it.pbi : index stm32f1xx_it.xcl
+build usart.pbi : index usart.xcl
+build usb.pbi : index usb.xcl
+build system_stm32f1xx.pbi : index system_stm32f1xx.xcl
+build stm32f1xx_hal.pbi : index stm32f1xx_hal.xcl
+build stm32f1xx_hal_cortex.pbi : index stm32f1xx_hal_cortex.xcl
+build stm32f1xx_hal_dma.pbi : index stm32f1xx_hal_dma.xcl
+build stm32f1xx_hal_exti.pbi : index stm32f1xx_hal_exti.xcl
+build stm32f1xx_hal_flash.pbi : index stm32f1xx_hal_flash.xcl
+build stm32f1xx_hal_flash_ex.pbi : index stm32f1xx_hal_flash_ex.xcl
+build stm32f1xx_hal_gpio.pbi : index stm32f1xx_hal_gpio.xcl
+build stm32f1xx_hal_gpio_ex.pbi : index stm32f1xx_hal_gpio_ex.xcl
+build stm32f1xx_hal_pcd.pbi : index stm32f1xx_hal_pcd.xcl
+build stm32f1xx_hal_pcd_ex.pbi : index stm32f1xx_hal_pcd_ex.xcl
+build stm32f1xx_hal_pwr.pbi : index stm32f1xx_hal_pwr.xcl
+build stm32f1xx_hal_rcc.pbi : index stm32f1xx_hal_rcc.xcl
+build stm32f1xx_hal_rcc_ex.pbi : index stm32f1xx_hal_rcc_ex.xcl
+build stm32f1xx_hal_spi.pbi : index stm32f1xx_hal_spi.xcl
+build stm32f1xx_hal_tim.pbi : index stm32f1xx_hal_tim.xcl
+build stm32f1xx_hal_tim_ex.pbi : index stm32f1xx_hal_tim_ex.xcl
+build stm32f1xx_hal_uart.pbi : index stm32f1xx_hal_uart.xcl
+build stm32f1xx_ll_usb.pbi : index stm32f1xx_ll_usb.xcl
+build STM32F103_LCD_part0.pbi : link dma.pbi gpio.pbi main.pbi spi.pbi stm32f1xx_hal_msp.pbi
+build STM32F103_LCD_part1.pbi : link stm32f1xx_it.pbi usart.pbi usb.pbi system_stm32f1xx.pbi stm32f1xx_hal.pbi
+build STM32F103_LCD_part2.pbi : link stm32f1xx_hal_cortex.pbi stm32f1xx_hal_dma.pbi stm32f1xx_hal_exti.pbi stm32f1xx_hal_flash.pbi stm32f1xx_hal_flash_ex.pbi
+build STM32F103_LCD_part3.pbi : link stm32f1xx_hal_gpio.pbi stm32f1xx_hal_gpio_ex.pbi stm32f1xx_hal_pcd.pbi stm32f1xx_hal_pcd_ex.pbi stm32f1xx_hal_pwr.pbi
+build STM32F103_LCD_part4.pbi : link stm32f1xx_hal_rcc.pbi stm32f1xx_hal_rcc_ex.pbi stm32f1xx_hal_spi.pbi stm32f1xx_hal_tim.pbi stm32f1xx_hal_tim_ex.pbi
+build STM32F103_LCD_part5.pbi : link stm32f1xx_hal_uart.pbi stm32f1xx_ll_usb.pbi
+build STM32F103_LCD.pbd : link STM32F103_LCD_part0.pbi STM32F103_LCD_part1.pbi STM32F103_LCD_part2.pbi STM32F103_LCD_part3.pbi STM32F103_LCD_part4.pbi STM32F103_LCD_part5.pbi
+build STM32F103_LCD.pbw : browsedata STM32F103_LCD.pbd
+
+

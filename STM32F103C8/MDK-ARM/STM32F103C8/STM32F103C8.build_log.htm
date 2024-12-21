@@ -1,0 +1,69 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.40.0.0
+Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ERHGDSFH 8618822864327, SDFHSFGH, LIC=MPPLD-8N5RN-Y8RFK-ZYZEJ-ZGP9Q-YJ70L
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.40.0.3
+Toolchain Path:  D:\Arm\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.22
+Assembler:       Armasm.exe V6.22
+Linker/Locator:  ArmLink.exe V6.22
+Library Manager: ArmAr.exe V6.22
+Hex Converter:   FromElf.exe V6.22
+CPU DLL:         SARMCM3.DLL V5.40.0.3
+Dialog DLL:      DARMSTM.DLL V1.69.1.0
+Target DLL:      Segger\JL2CM3.dll V2.99.44.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\project\STM32F103C8\MDK-ARM\STM32F103C8.uvprojx
+Project File Date:  12/20/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.22', folder: 'D:\Arm\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'STM32F103C8'
+../Core/Src/main.c(101): error: call to undeclared function 'usb_printf'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  101 |                 usb_printf("\r\n****** USB-CDC Example ******\r\n\r\n");
+      |                 ^
+../Core/Src/main.c(103): warning: passing 'char[6]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  103 |                 CDC_Transmit_FS("hello", 5);
+      |                                 ^~~~~~~
+../USB_DEVICE/App\usbd_cdc_if.h(108): note: passing argument to parameter 'Buf' here
+  108 | uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
+      |                                  ^
+1 warning and 1 error generated.
+compiling main.c...
+compiling usbd_cdc_if.c...
+"STM32F103C8\STM32F103C8.axf" - 1 Error(s), 1 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM::CMSIS@6.1.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.1.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil::STM32F1xx_DFP@2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_STM32F103C8
+  D:/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+  D:/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@6.1.0
+Target not created.
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>

@@ -1,0 +1,39 @@
+T742C 000:224.667   SEGGER J-Link V7.96h Log File
+T742C 000:224.776   DLL Compiled: May 15 2024 15:33:59
+T742C 000:224.782   Logging started @ 2024-12-20 09:42
+T742C 000:224.787   Process: D:\Arm\Keil_v5\UV4\UV4.exe
+T742C 000:224.793 - 224.791ms
+T742C 000:224.800 JLINK_SetWarnOutHandler(...)
+T742C 000:224.804 - 0.005ms
+T742C 000:224.810 JLINK_OpenEx(...)
+T742C 000:227.806   Firmware: J-Link V9 compiled Oct 12 2012 BTL     
+T742C 000:228.260   Firmware: J-Link V9 compiled Oct 12 2012 BTL     
+T742C 000:228.393   Decompressing FW timestamp took 115 us
+T742C 000:231.881   Decompressing FW took 3474 us
+T742C 000:232.089   Looking for J-Link GUI Server exe at: D:\Arm\Keil_v5\ARM\Segger\JLinkGUIServer.exe
+T742C 000:232.245   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T742C 000:232.335   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T742C 000:282.976   J-Link GUI Server info: "J-Link GUI server V7.66a "
+T742C 001:922.128   Updating firmware:  J-Link V9 compiled May  7 2021 16:26:12
+T742C 001:922.158   Replacing firmware: J-Link V9 compiled Oct 12 2012 BTL     
+T742C 001:922.293   Looking for J-Link GUI Server exe at: D:\Arm\Keil_v5\ARM\Segger\JLinkGUIServer.exe
+T742C 001:922.367   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T742C 001:922.411   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T742C 001:925.301   J-Link GUI Server info: "J-Link GUI server V7.66a "
+T742C 003:909.050   Waiting for new firmware to boot
+T742C 018:948.546   
+  ***** Error: 
+T742C 018:948.636   Communication timed out: Requested 4 bytes, received 0 bytes !
+T742C 018:948.664   
+  ***** Error: 
+T742C 018:948.690   Could not read J-Link capabilities.
+T742C 018:948.780   
+  ***** Error: 
+T742C 018:948.788   Cannot connect to J-Link
+T742C 018:949.146 - 18724.332ms returns "Communication timed out: Requested 4 bytes, received 0 bytes !
+Could not read J-Link capabilities.
+Cannot connect to J-Link"
+T742C 018:949.182 
+  ***** Warning: 
+T742C 018:949.194 API Error: API JLINK_GetHardwareVersion function called before JLINKARM_Open()
+T742C 018:949.206 JLINK_GetHardwareVersion()
