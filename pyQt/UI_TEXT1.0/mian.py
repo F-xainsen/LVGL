@@ -238,11 +238,9 @@ class MainWindow(QMainWindow):
         #self.send_to_device(send_string)
         #print(f"发送到下位机的数据: {send_string}")
         #图片传输完成后，发送数据到下位机
-        if self.data_block is None:
-            self.send_to_device(bytes(send_string,encoding="utf-8"))
+        # if self.data_block is None:
+        #     self.send_to_device(bytes(send_string,encoding="utf-8"))
             # print(f"发送到下位机的数据: {send_string}")
-        # convert_data = [self.float_to_hex_big_endian(val, 2) for val in data]
-        # self.send_to_device(convert_data)
 
     
     @pyqtSlot()
