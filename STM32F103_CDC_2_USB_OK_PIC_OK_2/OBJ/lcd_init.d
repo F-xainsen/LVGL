@@ -3,7 +3,7 @@
 ..\obj\lcd_init.o: ..\SYSTEM\sys\sys.h
 ..\obj\lcd_init.o: ..\USER\stm32f10x.h
 ..\obj\lcd_init.o: ..\CORE\core_cm3.h
-..\obj\lcd_init.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\lcd_init.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\lcd_init.o: ..\USER\system_stm32f10x.h
 ..\obj\lcd_init.o: ..\USER\stm32f10x_conf.h
 ..\obj\lcd_init.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -32,4 +32,4 @@
 ..\obj\lcd_init.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\obj\lcd_init.o: ..\SYSTEM\delay\delay.h
 ..\obj\lcd_init.o: ..\SYSTEM\usart\usart.h
-..\obj\lcd_init.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\lcd_init.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

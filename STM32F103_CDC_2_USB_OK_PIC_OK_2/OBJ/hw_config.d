@@ -5,7 +5,7 @@
 ..\obj\hw_config.o: ..\SYSTEM\sys\sys.h
 ..\obj\hw_config.o: ..\USER\stm32f10x.h
 ..\obj\hw_config.o: ..\CORE\core_cm3.h
-..\obj\hw_config.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\hw_config.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\hw_config.o: ..\USER\system_stm32f10x.h
 ..\obj\hw_config.o: ..\USER\stm32f10x_conf.h
 ..\obj\hw_config.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -46,6 +46,6 @@
 ..\obj\hw_config.o: ..\USB\CONFIG\usb_istr.h
 ..\obj\hw_config.o: ..\USB\CONFIG\usb_pwr.h
 ..\obj\hw_config.o: ..\SYSTEM\usart\usart.h
-..\obj\hw_config.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\obj\hw_config.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-..\obj\hw_config.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+..\obj\hw_config.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\hw_config.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\hw_config.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h

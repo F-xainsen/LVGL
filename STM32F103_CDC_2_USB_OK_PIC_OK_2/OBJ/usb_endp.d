@@ -5,7 +5,7 @@
 ..\obj\usb_endp.o: ..\SYSTEM\sys\sys.h
 ..\obj\usb_endp.o: ..\USER\stm32f10x.h
 ..\obj\usb_endp.o: ..\CORE\core_cm3.h
-..\obj\usb_endp.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\usb_endp.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\usb_endp.o: ..\USER\system_stm32f10x.h
 ..\obj\usb_endp.o: ..\USER\stm32f10x_conf.h
 ..\obj\usb_endp.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -45,5 +45,3 @@
 ..\obj\usb_endp.o: ..\USB\CONFIG\usb_istr.h
 ..\obj\usb_endp.o: ..\USB\CONFIG\usb_pwr.h
 ..\obj\usb_endp.o: ..\HARDWARE\LCD\lcd.h
-..\obj\usb_endp.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\obj\usb_endp.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

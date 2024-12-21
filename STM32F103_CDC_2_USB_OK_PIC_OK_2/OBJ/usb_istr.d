@@ -5,7 +5,7 @@
 ..\obj\usb_istr.o: ..\SYSTEM\sys\sys.h
 ..\obj\usb_istr.o: ..\USER\stm32f10x.h
 ..\obj\usb_istr.o: ..\CORE\core_cm3.h
-..\obj\usb_istr.o: D:\Arm\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\usb_istr.o: D:\development\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\usb_istr.o: ..\USER\system_stm32f10x.h
 ..\obj\usb_istr.o: ..\USER\stm32f10x_conf.h
 ..\obj\usb_istr.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
